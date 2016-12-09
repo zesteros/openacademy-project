@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from openerp import api, fields, models
+from openerp import api, exceptions, fields, models
 
 class Session(models.Model):
     _name = 'openacademy.session'
@@ -40,4 +40,8 @@ class Session(models.Model):
                     'message': "Increase seats or remove excess attendees",
                 },
             }
-
+    @api.one
+    @api.constrains('instructor_id', 'attendee_ids')
+    def _check_instructor_not_attendees(self):
+        if self.instructor_id and self.instructor_id in self.attendee_ids:
+            raise exceptions.ValidationError("A session's instructor can't be an attendee")
