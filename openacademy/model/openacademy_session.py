@@ -16,6 +16,9 @@ class Session(models.Model):
     ondelete='cascade', string="Course", required=True)
     attendee_ids = fields.Many2many('res.partner', string="Attendees")
     taken_seats = fields.Float(string="Taken seats", compute='_taken_seats')
+    end_date = fields.Date(string="End Date", store=True,
+    compute='_get_end_date', inverse='_set_end_date')
+
     
     @api.depends('seats', 'attendee_ids')
     def _taken_seats(self):
