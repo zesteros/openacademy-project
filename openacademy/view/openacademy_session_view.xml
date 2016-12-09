@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <openerp>
     <data>
-           <!-- Full id location:
-             action="openacademy.course_list_action"
+     <!-- Full id location: action="openacademy.course_list_action"
              It is not required when it is the same module -->
-
         <!-- session form view -->
         <record model="ir.ui.view" id="session_form_view">
             <field name="name">session.form</field>
@@ -30,7 +28,7 @@
                 </form>
             </field>
         </record>
-   <!-- session tree/list view -->
+        <!-- session tree/list view -->
         <record model="ir.ui.view" id="session_tree_view">
             <field name="name">session.tree</field>
             <field name="model">openacademy.session</field>
@@ -43,16 +41,23 @@
                 </tree>
             </field>
         </record>
-
+        <!-- calendar view -->
+        <record model="ir.ui.view" id="session_calendar_view">
+            <field name="name">session.calendar</field>
+            <field name="model">openacademy.session</field>
+            <field name="arch" type="xml">
+                <calendar string="Session Calendar" date_start="start_date" date_stop="end_date" color="instructor_id">
+                <field name="name"/>
+                </calendar>
+            </field>
+        </record>
         <record model="ir.actions.act_window" id="session_list_action">
             <field name="name">Sessions</field>
             <field name="res_model">openacademy.session</field>
             <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">tree,form,calendar</field>
         </record>
 
-        <menuitem id="session_menu" name="Sessions"
-                  parent="openacademy_menu"
-                  action="session_list_action"/>
+        <menuitem id="session_menu" name="Sessions" parent="openacademy_menu" action="session_list_action"/>
     </data>
 </openerp>
