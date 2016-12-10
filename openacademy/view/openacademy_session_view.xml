@@ -9,6 +9,18 @@
             <field name="model">openacademy.session</field>
             <field name="arch" type="xml">
                 <form string="Session Form">
+                    <header>
+                        <button name="action_draft" type="object"
+                                string="Reset to draft"
+                                states="confirmed,done"/>
+                        <button name="action_confirm" type="object"
+                                string="Confirm" states="draft"
+                                class="oe_highlight"/>
+                        <button name="action_done" type="object"
+                                string="Mark as done" states="confirmed"
+                                class="oe_highlight"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
                     <sheet>
                         <group string="General">
                             <field name="course_id"/>
@@ -51,6 +63,7 @@
                 </calendar>
             </field>
         </record>
+	<!-- gantt view -->
         <record model="ir.ui.view" id="session_gantt_view">
             <field name="name">session.gantt</field>
             <field name="model">openacademy.session</field>
@@ -62,6 +75,7 @@
                 </gantt>
             </field>
         </record>
+	<!-- Graph view -->
        <record model="ir.ui.view" id="openacademy_session_graph_view">
             <field name="name">openacademy.session.graph</field>
             <field name="model">openacademy.session</field>
@@ -72,6 +86,7 @@
                 </graph>
             </field>
         </record>
+	<!-- Kanban view -->
 	<record model="ir.ui.view" id="view_openacad_session_kanban">
             <field name="name">openacad.session.kanban</field>
             <field name="model">openacademy.session</field>
@@ -117,6 +132,7 @@
                 </kanban>
             </field>
         </record>
+	<!--Actions window -->
         <record model="ir.actions.act_window" id="session_list_action">
             <field name="name">Sessions</field>
             <field name="res_model">openacademy.session</field>
